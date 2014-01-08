@@ -20,7 +20,6 @@ object BuildSettings {
   }
 
   val settings = Seq(
-    compilerFlags,
-    exportJars := true
+    compilerFlags
   )
 }
