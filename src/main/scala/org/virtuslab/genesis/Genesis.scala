@@ -4,6 +4,7 @@ import sbt._
 import sbt.Keys._
 import org.virtuslab.genesis.plugins.{ SbtIdea, Scalariform }
 import org.virtuslab.genesis.tasks.VersionReport
+import net.virtualvoid.sbt.graph
 
 object Genesis extends Plugin {
 
@@ -11,7 +12,8 @@ object Genesis extends Plugin {
     BuildSettings.settings ++
     Scalariform.settings ++
     SbtIdea.settings ++
-    VersionReport.settings
+    VersionReport.settings ++
+    graph.Plugin.graphSettings
 }
 
 
