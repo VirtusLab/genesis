@@ -8,6 +8,8 @@ version := "0.1-SNAPSHOT"
 
 scalaVersion := "2.10.3"
 
+exportJars := true
+
 // plugin for dependency graphs
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.7.4")
 
