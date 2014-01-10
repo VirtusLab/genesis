@@ -38,6 +38,25 @@ import org.virtuslab.genesis.Genesis
 val settings = yourSettings ++ Genesis.common
 ```
 
+License generation
+------------------
+
+You can generate a license that will be prepended to all files that does not currently have it prepended.
+
+```scala
+import org.virtuslab.genesis.task.GenerateLicense
+import org.virtuslab.genesis.task.LicenseKeys._
+
+val settings = yourSettings ++ Seq(
+  license := """/**
+               | * This is my license.
+               | */
+               |""".stripMargin,
+  licensedFiles := Seq(".scala"),
+  GenerateLicense.generateLicenseTask
+)
+```
+
 Test
 ----
 
