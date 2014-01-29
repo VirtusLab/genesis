@@ -4,7 +4,7 @@ name := "genesis"
 
 organization := "org.virtuslab"
 
-version := "0.1.1"
+version := "0.1.2"
 
 scalaVersion := "2.10.3"
 
@@ -21,3 +21,6 @@ addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.2")
 
 // scalariform plugin
 addSbtPlugin("com.typesafe.sbt" % "sbt-scalariform" % "1.2.0")
+
+// sbt-updates
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.3")

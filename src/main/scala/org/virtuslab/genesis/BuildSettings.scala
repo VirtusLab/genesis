@@ -19,7 +19,7 @@ object BuildSettings {
     if(scalaVersion.value.startsWith("2.1")) Seq("-feature") else Seq.empty
   }
 
-  val settings = Seq(
+  val settings: Seq[Setting[_]] = Seq(
     compilerFlags
-  )
+  ) ++ addCommandAlias("pluginUpdates", "; reload plugins; dependencyUpdates; reload return")
 }
