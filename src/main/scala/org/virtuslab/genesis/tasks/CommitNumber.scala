@@ -12,7 +12,7 @@ abstract class VersionFormatter extends ((String, Date, String) => String) {
 object StandardVersionFormatter extends VersionFormatter {
   def apply(oldVersion: String, currentDate: Date, sha: String): String = {
     val date = new SimpleDateFormat("yyyyMMdd").format(currentDate)
-    oldVersion.replaceAll("SNAPSHOT", s"SNAPSHOT-$date-$sha")
+    oldVersion.replaceAll("SNAPSHOT", s"$date-$sha-SNAPSHOT")
   }
 }
 

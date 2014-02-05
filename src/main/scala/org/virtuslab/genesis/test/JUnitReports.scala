@@ -1,6 +1,7 @@
 package org.virtuslab.genesis.test
 
 import sbt.Keys._
+import sbt._
 
 /**
  * Settings for generating JUnit-compatible test reports.
@@ -9,7 +10,7 @@ import sbt.Keys._
  */
 object JUnitReports {
 
-  lazy val settings = Seq(
+  lazy val settings: Seq[Setting[_]] = Seq(
     testListeners <<= (target, streams).map((t, s) => Seq(new JUnitXmlTestsListener(t.getAbsolutePath, s.log)))
   )
 

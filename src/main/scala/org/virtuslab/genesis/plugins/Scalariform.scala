@@ -1,7 +1,8 @@
 package org.virtuslab.genesis.plugins
 
-import scalariform.formatter.preferences._
 import com.typesafe.sbt.SbtScalariform._
+import sbt._
+import scalariform.formatter.preferences._
 
 /**
  * Settings for Scalariform - scala auto-formatter
@@ -23,7 +24,7 @@ object Scalariform {
     // aligning => in case statements vertically
     .setPreference(AlignSingleLineCaseStatements, true)
 
-  lazy val settings = scalariformSettings ++ Seq(
+  lazy val settings : Seq[Setting[_]]= scalariformSettings ++ Seq(
     ScalariformKeys.preferences := commonScalariformPreferences
   )
 }

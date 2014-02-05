@@ -41,7 +41,7 @@ object VersionReport {
     report
   }
 
-  lazy val settings = Seq(
+  lazy val settings: Seq[Setting[_]] = Seq(
     versionReportTask
   )
 }

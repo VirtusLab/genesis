@@ -22,15 +22,19 @@ Common
 
 Common settings, contains:
 
-* Several compiler flags for warnings: `-deprecation -unchecked -Xlint -Ywarn-all` and, if Scala version >= 2.10 `-feature`
+* Several compiler flags for warnings: `-deprecation -unchecked -Xlint -Ywarn-all` and, if Scala version >= 2.10 `-feature`.
 * [Scalariform](https://github.com/sbt/sbt-scalariform) settings - basic, plus:
  * `PreserveSpaceBeforeArguments = true`
  * `PreserveDanglingCloseParenthesis = true`
  * `AlignParameters = true`
  * `AlignSingleLineCaseStatements = true`
-* SbtIdea settings for [sbt-idea](https://github.com/mpeltonen/sbt-idea) - excluding `.idea`, `.idea_modules` and `.settings`
-* `versionReport` - prints all dependencies for current module (sorted by artifact name)
-* Dependency graph settings from [sbt-dependency-graph](https://github.com/jrudolph/sbt-dependency-graph)
+* SbtIdea settings for [sbt-idea](https://github.com/mpeltonen/sbt-idea) - excluding `.idea`, `.idea_modules` and `.settings`. It also generates `ref` and `javascript` folders in your generated sources (if you have a Play project).
+* `versionReport` - prints all dependencies for current module (sorted by artifact name).
+* [sbt-updates](https://github.com/rtimush/sbt-updates) plugin, with custom `pluginUpdates` command added for checking plugins updates.
+* Dependency graph settings from [sbt-dependency-graph](https://github.com/jrudolph/sbt-dependency-graph).
+* Customized prompt in format "module-version> ".
+
+Usage:
 
 ```scala
 import org.virtuslab.genesis.Genesis

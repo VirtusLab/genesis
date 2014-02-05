@@ -1,8 +1,8 @@
 package org.virtuslab.genesis.lift
 
+import sbt._
 import sbt.Keys._
 import sbt.Tests
-
 
 /**
  * Logger initializer for Lift projects.
@@ -34,7 +34,7 @@ object LoggerInitializer {
         loggerSetupEq.invoke(logger, configFuncBox.asInstanceOf[Object])
     }
 
-  lazy val settings = Seq(
+  lazy val settings: Seq[Setting[_]] = Seq(
     fuckedUpLiftTestLoggerSettings
   )
 
