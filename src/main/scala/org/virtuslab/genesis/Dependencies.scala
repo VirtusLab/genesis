@@ -77,9 +77,9 @@ object Dependencies {
 
   def scalaTest(version: String) = "org.scalatest" %% "scalatest" % version
 
-  def slick(version: String) =  "com.typesafe.slick" %% "slick" % version
+  def slick(version: String) = "com.typesafe.slick" %% "slick" % version
 
-  def slickTestKit(version: String) =  "com.typesafe.slick" %% "slick-testkit" % version
+  def slickTestKit(version: String) = "com.typesafe.slick" %% "slick-testkit" % version
 
   def slf4jLog4j12(version: String) = "org.slf4j" % "slf4j-log4j12" % version
 

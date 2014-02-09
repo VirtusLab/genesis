@@ -50,8 +50,8 @@ object CommitNumber extends Configuration {
   lazy val hgHeadCommitNum = settingKey[String]("current hg commit number (may vary from repo to repo)")
 
   val hgSettings: Seq[Setting[_]] = defaults ++ Seq(
-    hgHeadCommitSha in ThisBuild := Process("hg id -i").lines.head.replaceAll( """(\n|\r|\+)""", ""),
-    hgHeadCommitNum in ThisBuild := Process("hg id -n").lines.head.replaceAll( """(\n|\r|\+)""", ""),
+    hgHeadCommitSha in ThisBuild := Process("hg id -i").lines.head.replaceAll("""(\n|\r|\+)""", ""),
+    hgHeadCommitNum in ThisBuild := Process("hg id -n").lines.head.replaceAll("""(\n|\r|\+)""", ""),
     version := {
       val old: String = version.value
       val sha: String = hgHeadCommitSha.value

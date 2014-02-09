@@ -3,8 +3,8 @@
 */
 
 /**
-* From https://github.com/hydrasi/junit_xml_listener
-*/
+ * From https://github.com/hydrasi/junit_xml_listener
+ */
 
 package org.virtuslab.genesis.test
 
@@ -17,10 +17,10 @@ import scala.xml.{ Elem, Node, XML }
 import sbt.testing.{ Event => TEvent, Status => TStatus, NestedSuiteSelector, NestedTestSelector, TestSelector }
 
 /**
-* A tests listener that outputs the results it receives in junit xml
-* report format.
-* @param outputDir path to the dir in which a folder with results is generated
-*/
+ * A tests listener that outputs the results it receives in junit xml
+ * report format.
+ * @param outputDir path to the dir in which a folder with results is generated
+ */
 class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends TestsListener {
   /**Current hostname so we know which machine executed the tests*/
   val hostname = InetAddress.getLocalHost.getHostName
@@ -42,10 +42,10 @@ class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends Tests
     </properties>
 
   /**
-* Extract the test name from the TestEvent.
-*
-* I think there should be a nicer way to do this, but it doesn't look like SBT is going to give us that.
-*/
+   * Extract the test name from the TestEvent.
+   *
+   * I think there should be a nicer way to do this, but it doesn't look like SBT is going to give us that.
+   */
   def testNameFromTestEvent(event: TEvent) = {
     def dropPrefix(s: String, prefix: String) = if (s.startsWith(prefix)) {
       s.drop(prefix.length)
@@ -54,18 +54,18 @@ class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends Tests
     }
 
     event.selector() match {
-      case test: TestSelector => dropPrefix(test.testName(), event.fullyQualifiedName() + ".")
+      case test: TestSelector         => dropPrefix(test.testName(), event.fullyQualifiedName() + ".")
       // I don't know if the events below are possible with JUnit, nor do I know exactly what to do with them.
-      case test: NestedTestSelector => dropPrefix(test.testName(), event.fullyQualifiedName() + ".")
+      case test: NestedTestSelector   => dropPrefix(test.testName(), event.fullyQualifiedName() + ".")
       case suite: NestedSuiteSelector => suite.suiteId()
-      case _ => event.fullyQualifiedName()
+      case _                          => event.fullyQualifiedName()
     }
   }
 
   /**
-* Gathers data for one Test Suite. We map test groups to TestSuites.
-* Each TestSuite gets its own output file.
-*/
+   * Gathers data for one Test Suite. We map test groups to TestSuites.
+   * Each TestSuite gets its own output file.
+   */
   class TestSuite(val name: String) {
     val events: ListBuffer[TEvent] = new ListBuffer()
     val start = System.currentTimeMillis
@@ -88,34 +88,34 @@ class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends Tests
       def logWith(color: String) = logger.info(color + " " + testNameFromTestEvent(event))
 
       event.status match {
-        case TStatus.Error => logWith("!")
+        case TStatus.Error   => logWith("!")
         case TStatus.Failure => logWith("x")
         case TStatus.Skipped => logWith("o")
         case TStatus.Success => logWith("+")
-        case _ => ()
+        case _               => ()
       }
     }
 
     /**
-* Returns a triplet with the number of errors, failures and the
-* total numbers of tests in this suite.
-*/
+     * Returns a triplet with the number of errors, failures and the
+     * total numbers of tests in this suite.
+     */
     def count(): (Int, Int, Int) = {
       var errors, failures = 0
       for (e <- events) {
         e.status match {
-          case TStatus.Error => errors += 1
+          case TStatus.Error   => errors += 1
           case TStatus.Failure => failures += 1
-          case _ =>
+          case _               =>
         }
       }
       (errors, failures, events.size)
     }
 
     /**
-* Stops the time measuring and emits the XML for
-* All tests collected so far.
-*/
+     * Stops the time measuring and emits the XML for
+     * All tests collected so far.
+     */
     def stop(): Elem = {
       end = System.currentTimeMillis
       val duration = end - start
@@ -177,7 +177,7 @@ class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends Tests
           case (TStatus.Skipped, _) =>
             <skipped/>
 
-          case _ => {}
+          case _=> {}
         }
       }
     </testcase>
@@ -190,47 +190,47 @@ class JUnitXmlTestsListener(val outputDir: String, logger: Logger) extends Tests
   override def doInit(): Unit = { targetDir.mkdirs() }
 
   /**
-* Starts a new, initially empty Suite with the given name.
-*/
+   * Starts a new, initially empty Suite with the given name.
+   */
   override def startGroup(name: String) { testSuite = new TestSuite(name) }
 
   /**
-* Adds all details for the given even to the current suite.
-*/
+   * Adds all details for the given even to the current suite.
+   */
   override def testEvent(event: TestEvent): Unit = for (e <- event.detail) { testSuite.addEvent(e) }
 
   /**
-* called for each class or equivalent grouping
-* We map one group to one Testsuite, so for each Group
-* we create an XML like this:
-* <?xml version="1.0" encoding="UTF-8" ?>
-* <testsuite errors="x" failures="y" tests="z" hostname="example.com" name="eu.henkelmann.bla.SomeTest" time="0.23">
-* <properties>
-* <property name="os.name" value="Linux" />
-* ...
-* </properties>
-* <testcase classname="eu.henkelmann.bla.SomeTest" name="testFooWorks" time="0.0" >
-* <error message="the foo did not work" type="java.lang.NullPointerException">... stack ...</error>
-* </testcase>
-* <testcase classname="eu.henkelmann.bla.SomeTest" name="testBarThrowsException" time="0.0" />
-* <testcase classname="eu.henkelmann.bla.SomeTest" name="testBaz" time="0.0">
-* <failure message="the baz was no bar" type="junit.framework.AssertionFailedError">...stack...</failure>
-* </testcase>
-* <system-out><![CDATA[]]></system-out>
-* <system-err><![CDATA[]]></system-err>
-* </testsuite>
-*
-* I don't know how to measure the time for each testcase, so it has to remain "0.0" for now :(
-*/
+   * called for each class or equivalent grouping
+   * We map one group to one Testsuite, so for each Group
+   * we create an XML like this:
+   * <?xml version="1.0" encoding="UTF-8" ?>
+   * <testsuite errors="x" failures="y" tests="z" hostname="example.com" name="eu.henkelmann.bla.SomeTest" time="0.23">
+   * <properties>
+   * <property name="os.name" value="Linux" />
+   * ...
+   * </properties>
+   * <testcase classname="eu.henkelmann.bla.SomeTest" name="testFooWorks" time="0.0" >
+   * <error message="the foo did not work" type="java.lang.NullPointerException">... stack ...</error>
+   * </testcase>
+   * <testcase classname="eu.henkelmann.bla.SomeTest" name="testBarThrowsException" time="0.0" />
+   * <testcase classname="eu.henkelmann.bla.SomeTest" name="testBaz" time="0.0">
+   * <failure message="the baz was no bar" type="junit.framework.AssertionFailedError">...stack...</failure>
+   * </testcase>
+   * <system-out><![CDATA[]]></system-out>
+   * <system-err><![CDATA[]]></system-err>
+   * </testsuite>
+   *
+   * I don't know how to measure the time for each testcase, so it has to remain "0.0" for now :(
+   */
   override def endGroup(name: String, t: Throwable) = {
     System.err.println("Throwable escaped the test run of '" + name + "': " + t)
     t.printStackTrace(System.err)
   }
 
   /**
-* Ends the current suite, wraps up the result and writes it to an XML file
-* in the output folder that is named after the suite.
-*/
+   * Ends the current suite, wraps up the result and writes it to an XML file
+   * in the output folder that is named after the suite.
+   */
   override def endGroup(name: String, result: TestResult.Value) = {
     if (name.endsWith("Test")) {
       XML.save(new File(targetDir, testSuite.name.split('.').takeRight(1).mkString + ".xml").getAbsolutePath, testSuite.stop(), "UTF-8", true, null)

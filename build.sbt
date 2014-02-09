@@ -24,3 +24,6 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-scalariform" % "1.2.0")
 
 // sbt-updates
 addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.3")
+
+// self=dependency ;)
+org.virtuslab.genesis.Genesis.common

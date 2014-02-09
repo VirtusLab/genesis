@@ -14,11 +14,11 @@ object Genesis extends Plugin {
 
   lazy val common: Seq[Setting[_]] =
     BuildSettings.settings ++
-    Scalariform.settings ++
-    SbtIdea.settings ++
-    VersionReport.settings ++
-    graph.Plugin.graphSettings ++
-    aliases ++ Seq(
-      prompt
-    )
+      Scalariform.settings ++
+      SbtIdea.settings ++
+      VersionReport.settings ++
+      graph.Plugin.graphSettings ++
+      aliases ++ Seq(
+        prompt
+      )
 }
