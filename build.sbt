@@ -4,7 +4,7 @@ name := "genesis"
 
 organization := "org.virtuslab"
 
-version := "0.1.3"
+version := "0.1.4-SNAPSHOT"
 
 scalaVersion := "2.10.3"
 
