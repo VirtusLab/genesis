@@ -14,7 +14,7 @@ object LoggerInitializer {
   lazy val fuckedUpLiftTestLoggerSettings =
     testOptions += Tests.Setup.apply {
       loader: ClassLoader =>
-      // Get Logger.setup
+        // Get Logger.setup
         val boxClass = loader.loadClass("net.liftweb.common.Box")
         val loggerClass = loader.loadClass("net.liftweb.common.Logger$")
         val logger = loggerClass.getField("MODULE$").get(null)

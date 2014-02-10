@@ -20,7 +20,7 @@ object VersionReport {
     val artifactSort: (Attributed[sbt.File]) => String = attributed =>
       attributed.get(Keys.moduleID.key) match {
         case Some(moduleId) => moduleId.name
-        case None => attributed.data.getName
+        case None           => attributed.data.getName
       }
 
     val nameExtractor: (Attributed[sbt.File]) => String = attributed =>

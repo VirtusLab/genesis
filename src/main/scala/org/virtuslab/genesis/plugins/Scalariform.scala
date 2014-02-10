@@ -24,7 +24,7 @@ object Scalariform {
     // aligning => in case statements vertically
     .setPreference(AlignSingleLineCaseStatements, true)
 
-  lazy val settings : Seq[Setting[_]]= scalariformSettings ++ Seq(
+  lazy val settings: Seq[Setting[_]] = scalariformSettings ++ Seq(
     ScalariformKeys.preferences := commonScalariformPreferences
   )
 }

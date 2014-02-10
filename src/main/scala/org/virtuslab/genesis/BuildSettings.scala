@@ -16,8 +16,8 @@ object BuildSettings {
     "-Xlint",
     "-Ywarn-all"
   ) ++ {
-    if (scalaVersion.value.startsWith("2.1")) Seq("-feature") else Seq.empty
-  }
+      if (scalaVersion.value.startsWith("2.1")) Seq("-feature") else Seq.empty
+    }
 
   val settings: Seq[Setting[_]] = Seq(
     compilerFlags
