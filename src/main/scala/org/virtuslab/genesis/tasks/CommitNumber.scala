@@ -5,14 +5,15 @@ import sbt.Keys._
 import java.text.SimpleDateFormat
 import java.util.Date
 
-abstract class VersionFormatter extends ((String, Date, String) => String) {
-  def apply(oldVersion: String, currentDate: Date, sha: String): String
+abstract class VersionFormatter extends ((String, String) => String) {
+  def apply(oldVersion: String, sha: String): String
 }
 
 object StandardVersionFormatter extends VersionFormatter {
-  def apply(oldVersion: String, currentDate: Date, sha: String): String = {
-    val date = new SimpleDateFormat("yyyyMMdd").format(currentDate)
-    oldVersion.replaceAll("SNAPSHOT", s"$date-$sha-SNAPSHOT")
+  def apply(oldVersion: String, sha: String): String = {
+    val currentDate = new Date
+    val dateFormatted = new SimpleDateFormat("yyyyMMdd").format(currentDate)
+    oldVersion.replaceAll("SNAPSHOT", s"$dateFormatted-$sha-SNAPSHOT")
   }
 }
 
@@ -41,7 +42,7 @@ object CommitNumber extends Configuration {
       val sha: String = gitHeadCommitSha.value
       val formatter: VersionFormatter = versionFormatter.value
       val snapshot: Boolean = old endsWith "-SNAPSHOT"
-      if (snapshot) formatter(old, new Date, sha) else old
+      if (snapshot) formatter(old, sha) else old
     }
   )
 
@@ -57,7 +58,7 @@ object CommitNumber extends Configuration {
       val sha: String = hgHeadCommitSha.value
       val formatter: VersionFormatter = versionFormatter.value
       val snapshot: Boolean = old endsWith "-SNAPSHOT"
-      if (snapshot) formatter(old, new Date, sha) else old
+      if (snapshot) formatter(old, sha) else old
     }
   )
 

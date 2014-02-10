@@ -42,6 +42,37 @@ import org.virtuslab.genesis.Genesis
 val settings = yourSettings ++ Genesis.common
 ```
 
+Commit hash added to version
+----------------------------
+
+If your project uses git or mercurial you can have unique names for your snapshots generated.
+
+For git add:
+
+```scala
+org.virtuslab.genesis.tasks.CommitNumber.gitSettings
+```
+
+For mercurial add:
+
+```scala
+org.virtuslab.genesis.tasks.CommitNumber.hgSettings
+```
+
+Those will provide you with `(git|hg)HeadCommitSha` setting and if (and only if) your version number ends with `-SNAPSHOT` it will be changed.
+
+Default format for new version is `version-yyyymmdd-hash-SNAPSHOT` and can be changed by settings `versionFormatter`:
+
+```scala
+import org.virtuslab.genesis.tasks._
+
+// formatter without date
+CommitNumber.versionFormatter := new VersionFormatter {
+  def apply(oldVersion: String, sha: String): String =
+   oldVersion.replaceAll("SNAPSHOT", s"$sha-SNAPSHOT")
+}
+```
+
 License generation
 ------------------
 
