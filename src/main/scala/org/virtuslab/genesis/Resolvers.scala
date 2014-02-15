@@ -20,7 +20,4 @@ object Resolvers {
   val sonatypeReleases = Resolver.sonatypeRepo("releases")
 
   val julienrf = "julienrf.github.com" at "http://julienrf.github.com/repo/"
-
-  val localMaven = "Local Maven Repository" at s"file://${Path.userHome.absolutePath}/.m2/repository"
-
 }
