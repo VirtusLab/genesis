@@ -6,7 +6,7 @@ organization := "org.virtuslab"
 
 version := "0.1.4-SNAPSHOT"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.10.4"
 
 exportJars := true
 
@@ -25,5 +25,5 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-scalariform" % "1.2.0")
 // sbt-updates
 addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.3")
 
-// self=dependency ;)
+// self-dependency ;)
 org.virtuslab.genesis.Genesis.common
