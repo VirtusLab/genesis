@@ -13,8 +13,7 @@ object BuildSettings {
   lazy val compilerFlags = scalacOptions ++= Seq(
     "-unchecked",
     "-deprecation",
-    "-Xlint",
-    "-Ywarn-all"
+    "-Xlint"
   ) ++ {
       if (scalaVersion.value.startsWith("2.1")) Seq("-feature") else Seq.empty
     }
