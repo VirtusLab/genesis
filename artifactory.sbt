@@ -1,5 +1,5 @@
 publishTo := {
-  val artifactory = "http://migotek.virtuslab.com:8081/artifactory"
+  val artifactory = "https://artifactory.virtuslab.com/artifactory"
   if (version.value.endsWith("SNAPSHOT")) {
     Some("Artifactory Realm" at s"$artifactory/simple/plugins-snapshot-local/")
   } else {
