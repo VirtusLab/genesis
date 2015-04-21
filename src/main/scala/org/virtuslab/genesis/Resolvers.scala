@@ -13,7 +13,7 @@ object Resolvers {
 
   val scalaToolsReleases = "Scala-Tools Dependencies Repository for Releases" at "https://oss.sonatype.org/content/groups/scala-tools"
 
-  val dukascopy = "Dukascopy public repository" at "http://www.dukascopy.com/client/jforexlib/publicrepo/"
+  val dukascopy = "Dukascopy public repository" at "https://www.dukascopy.com/client/jforexlib/publicrepo/"
 
   val sonatypeSnapshots = Resolver.sonatypeRepo("snapshots")
 

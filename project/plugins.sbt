@@ -1,6 +1,6 @@
 // VirtusLab sonatype repo
 
-val artifactory = "http://migotek.virtuslab.com:8081/artifactory"
+val artifactory = "https://artifactory.virtuslab.com/artifactory"
 
 resolvers += "Local Plugins Snapshots" at s"$artifactory/simple/plugins-snapshot-local/"
 
