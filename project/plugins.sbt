@@ -8,4 +8,4 @@ resolvers += "Local Plugins Releases" at s"$artifactory/simple/plugins-release-l
 
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
-addSbtPlugin("org.virtuslab" %% "genesis" % "0.1.4")
+addSbtPlugin("org.virtuslab" %% "genesis" % "0.1.5")
